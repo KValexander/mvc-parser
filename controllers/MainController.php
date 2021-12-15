@@ -23,7 +23,7 @@ class MainController extends Controller {
 		$html = $parser->url($url)
 			->wrap("ul", "class", "novel-list horizontal col2", 0)
 			->content("li", "class", "novel-item")
-			->link("href")
+			->link(" href")
 			->link("data-src")
 			->get();
 

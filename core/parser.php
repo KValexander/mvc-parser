@@ -40,7 +40,7 @@ class Parser {
 	// Link processing
 	private function link_processing($attr, $key, $val) {
 		preg_match_all("#$attr=(\"|')(.*?)(\"|')#su", $val, $result, PREG_PATTERN_ORDER);
-		foreach($result[0] as $k => $v)
+		foreach(array_values(array_unique($result[0])) as $k => $v)
 			$this->content[$key][$k][] = preg_replace("/(\"|\')/", "", preg_split("#$attr=#", $v)[1]);
 	}
 
