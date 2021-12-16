@@ -44,27 +44,14 @@ app.controllers.main = {
 			// Content processing
 			content = app.controllers.main.novels_page_content_processing(data.data);
 
-			// Paginator
-			app.template.get_template("novels/paginator", 5);
-			count = (page <= 1) ? page : page - 1;
-			for(let i = count; i < count + 4; i++) {
-				app.template.set_value({
-					"PAGE": i,
-					"N": i,
-				});
-				app.template.get_content();
-			}
-			app.template.set_value({
-				"PAGE": ++page,
-				"N": page + 2
-			});
-			paginator = app.template.get_content();
+			// Paginator processing
+			paginator = app.controllers.main.paginator_processing(page);
 
 			// Get template
 			app.template.get_template("novels/novels");
 			app.template.set_value({
 				"URL": app.config.url,
-				"PAGE": --page,
+				"PAGE": page,
 				"CONTENT": content,
 				"PAGINATOR": paginator
 			});
@@ -102,5 +89,24 @@ app.controllers.main = {
 				"SRC": content[4]
 			}); app.template.get_content();
 		}); return app.template.get_content();
-	}
+	},
+
+	// Paginator processing
+	paginator_processing: function(page) {
+		app.template.get_template("novels/paginator", 5);
+		if(page > 2) count = page - 2; else if(page <= 1) count = page; else count = page - 1;
+		for(let i = count; i < count + 4; i++) {
+			app.template.set_value({
+				"PAGE": i,
+				"N": i,
+			});
+			app.template.get_content();
+		}
+		count = (page > 2) ? parseInt(page) + 2 : count = parseInt(page) + 3;
+		app.template.set_value({
+			"PAGE": count,
+			"N": count
+		});
+		return app.template.get_content();
+	},
 }
