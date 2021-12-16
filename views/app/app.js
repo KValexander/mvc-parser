@@ -7,7 +7,7 @@ window.onload = () => {
 }
 
 // Include style
-connect.style(`${root}style/style.css`);
+connect.style(`${root}assets/style/style.css`);
 
 // Including core scripts
 connect.script([

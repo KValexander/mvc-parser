@@ -1,3 +1,8 @@
+@font-face {
+	font-family:  VarelaRound-Regular;
+	src:  url("../fonts/VarelaRound-Regular.ttf");
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -5,12 +10,13 @@
 }
 
 body {
-	font-family: Arial;
+	font-family: VarelaRound-Regular;
 	font-size:  14pt;
+	background-color:  #ebeae6;
 }
 
 a {
-	color:  white;
+	color:  black;
 	cursor:  pointer;
 	text-decoration: none;
 }
@@ -44,31 +50,33 @@ div.flex {
 }
 
 h1.head {
-	color:  #444b5b;
 	font-size:  24pt;
 	padding-bottom:  5px;
 	margin-bottom:  20px;
-	border-bottom:  solid 2px #444b5b;
 }
 
-.gray {
-	color:  #444b5b;
+h2.head {
+	font-size: 18pt;
+	margin-bottom:  5px;
 }
 
-.underline {
-	border-bottom: solid 1px #444b5b;
+hr {
+	margin-bottom:  20px;
+	border:  solid 1px black;
+	box-shadow: 0 3px 5px rgba(0,0,0,0.5);
 }
 
 header {
 	padding:  20px 0;
-	background-color:  #444b5b;
+	background-color:  white;
+	border-bottom:  solid 1px black;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.5);
 }
 
 header div.content {
 	display:  flex;
 	justify-content: space-between;
 	align-items: center;
-	color:  white;
 }
 
 header div.content div.logo {
@@ -81,11 +89,7 @@ header div.content div.logo img {
 }
 
 header nav a {
-	padding:  0 5px;
-}
-
-main a {
-	color:  black;
+	padding:  0 10px;
 }
 
 main div.novel-list {
@@ -96,26 +100,49 @@ main div.novel-list {
 
 main div.novel-item {
 	width:  15%;
+	background-color:  white;
 	margin-bottom:  20px;
+	border-radius: 5px;
+	overflow: hidden;
+	box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+main div.novel-item div.name {
+	padding:  5px 10px;
+	display:  flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+main div.novel-item div.cover {
+	height:  200px;
 }
 
 main div.novel-item img {
-	border-radius:  5px;
-	height:  230px;
+	height:  100%;
 	width: 100%;
 }
 
 main div.paginator {
 	display:  flex;
+	border-radius: 5px;
+	overflow: hidden;
 }
 
 main div.paginator div {
 	padding:  5px 10px;
 	cursor:  pointer;
-	border-radius:  5px;
+	background-color:  white;
+}
+
+main div.paginator div:hover {
+	background-color:  black;
+	color:  white;
 }
 
 main div.paginator div.active {
 	background-color:  black;
 	color:  white;
 }
+

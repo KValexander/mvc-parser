@@ -18,6 +18,7 @@ app.controllers.main = {
 			// Get template
 			app.template.get_template("home/home");
 			app.template.set_value({
+				"TITLE": "New Ongoing Release",
 				"URL": app.config.url,
 				"CONTENT": content,
 			});
@@ -55,7 +56,7 @@ app.controllers.main = {
 			}
 			app.template.set_value({
 				"PAGE": ++page,
-				"N":">"
+				"N": page + 2
 			});
 			paginator = app.template.get_content();
 
@@ -70,6 +71,9 @@ app.controllers.main = {
 
 			// Out content
 			app.html.content.innerHTML = app.template.get_content();
+			document.querySelectorAll(".paginator div").forEach(elem => {
+				if(elem.innerHTML == page) return elem.classList.add("active");
+			});
 
 			// Hide preloader
 			app.popup.hide();
@@ -78,16 +82,14 @@ app.controllers.main = {
 
 	// Content processing
 	main_page_content_processing: function(data) {
-		let count = 0;
-		data.forEach(array => count += array.length);
-		app.template.get_template("item-content", count);
-		data.forEach(array => array.forEach(content => {
+		app.template.get_template("item-content", data.length);
+		data.forEach(content => {
 			app.template.set_value({
 				"NAME": content[1].substring(0, 29),
 				"URL": content[2],
 				"SRC": content[3]
 			}); app.template.get_content();
-		})); return app.template.get_content();
+		}); return app.template.get_content();
 	},
 
 	// Content processing

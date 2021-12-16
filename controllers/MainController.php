@@ -7,7 +7,7 @@ class MainController extends Controller {
 		$url = $this->request->input("url");
 		$parser = new Parser();
 		$html = $parser->url($url)
-			->wrap("ul", "class", "novel-list")
+			->wrap("ul", "class", "novel-list", 0)
 			->content("li", "class", "novel-item")
 			->link("href")
 			->link("data-src")
