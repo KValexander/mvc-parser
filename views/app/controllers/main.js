@@ -36,6 +36,7 @@ app.controllers.main = {
 		// Get page
 		if(!app.route.var.page) page = 1;
 		else page = app.route.var.page;
+
 		// Preloader
 		app.popup.preloader();
 
@@ -93,20 +94,16 @@ app.controllers.main = {
 
 	// Paginator processing
 	paginator_processing: function(page) {
-		app.template.get_template("novels/paginator", 5);
+		number = 5;
+		app.template.get_template("novels/paginator", number);
 		if(page > 2) count = page - 2; else if(page <= 1) count = page; else count = page - 1;
-		for(let i = count; i < count + 4; i++) {
+		for(let i = count; i < count + number; i++) {
 			app.template.set_value({
 				"PAGE": i,
 				"N": i,
 			});
 			app.template.get_content();
 		}
-		count = (page > 2) ? parseInt(page) + 2 : count = parseInt(page) + 3;
-		app.template.set_value({
-			"PAGE": count,
-			"N": count
-		});
 		return app.template.get_content();
 	},
 }
