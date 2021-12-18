@@ -13,7 +13,7 @@ app.controllers.main = {
 		// Get request
 		app.request.get(data => {
 			// Content processing
-			content = app.controllers.main.main_page_content_processing(data.data);
+			content = app.controllers.main.main_content(data.data);
 
 			// Get template
 			app.template.get_template("home/home");
@@ -43,7 +43,7 @@ app.controllers.main = {
 		// Get request
 		app.request.get(data => {
 			// Content processing
-			content = app.controllers.main.novels_page_content_processing(data.data);
+			content = app.controllers.main.novels_content(data.data);
 
 			// Paginator processing
 			paginator = app.controllers.main.paginator_processing(page);
@@ -68,26 +68,40 @@ app.controllers.main = {
 		}, "/api/novels/"+page+"?url="+app.config.url+"genre/all/popular/all/"+page);
 	},
 
-	// Content processing
-	main_page_content_processing: function(data) {
-		app.template.get_template("item-content", data.length);
+	// Get main page data
+	main_content: function(data) {
+		let result = [];
 		data.forEach(content => {
-			app.template.set_value({
-				"NAME": content[1].substring(0, 29),
-				"URL": content[2],
-				"SRC": content[3]
-			}); app.template.get_content();
-		}); return app.template.get_content();
+			result.push({
+				name: content[1].substring(0, 29),
+				url: content[2],
+				src: content[3],
+			});
+		});
+		return app.controllers.main.content_processing(result);
+	},
+
+	// Get novels page data
+	novels_content: function(data) {
+		let result = [];
+		data.forEach(content => {
+			result.push({
+				name: content[0].substring(0, 29),
+				url: content[3],
+				src: content[4],
+			});
+		});
+		return app.controllers.main.content_processing(result);
 	},
 
 	// Content processing
-	novels_page_content_processing: function(data) {
+	content_processing: function(data) {
 		app.template.get_template("item-content", data.length);
 		data.forEach(content => {
 			app.template.set_value({
-				"NAME": content[0].substring(0, 29),
-				"URL": content[3],
-				"SRC": content[4]
+				"NAME": content.name,
+				"URL": content.url,
+				"SRC": content.src
 			}); app.template.get_content();
 		}); return app.template.get_content();
 	},
