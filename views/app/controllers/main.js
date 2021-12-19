@@ -2,7 +2,7 @@
 app.controllers.main = {
 	// Parser redirect
 	redirect: function(url) {
-		console.log(url);
+		app.route.search(url);
 	},
 
 	// Main page
@@ -66,6 +66,13 @@ app.controllers.main = {
 			// Hide preloader
 			app.popup.hide();
 		}, "/api/novels/"+page+"?url="+app.config.url+"genre/all/popular/all/"+page);
+	},
+
+	// Novel page
+	novel_page: function() {
+		if(!app.route.var.id) return app.route.not_found();
+		id = app.route.var.id;
+		console.log(id);
 	},
 
 	// Get main page data

@@ -30,6 +30,15 @@ class MainController extends Controller {
 		return response(200, array_slice($html, 0, 24));
 	}
 
+	// Novel page
+	public function novel_page() {
+		$id = $this->request->route("id");
+		$url = $this->request->input("url");
+		$parser = new Parser();
+		return response(200, $html);
+
+	}
+
 }
 
 ?>

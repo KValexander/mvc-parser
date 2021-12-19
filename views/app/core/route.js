@@ -37,8 +37,8 @@ app.route.processing = (route) => {
 
 			// Determining routes matching
 			pattern = r.replace(/\{.*?\}/g, "(.*?)");
-			if(r.match(pattern, route)) {
-
+			if(route.match(pattern)) {
+				
 				// Retrieving values and keys of route variables
 				for(let i = 0; i < val_route.length; i++)
 					if(val_r[i].match("{.*?}"))
