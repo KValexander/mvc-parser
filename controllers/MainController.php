@@ -11,7 +11,7 @@ class MainController extends Controller {
 			->content("li", "class", "novel-item")
 			->link("href")
 			->link("data-src")
-			->get();
+			->get_content();
 		return response(200, $html);
 	}
 
@@ -25,7 +25,7 @@ class MainController extends Controller {
 			->content("li", "class", "novel-item")
 			->link(" href")
 			->link("data-src")
-			->get();
+			->get_content();
 
 		return response(200, array_slice($html, 0, 24));
 	}
@@ -35,7 +35,14 @@ class MainController extends Controller {
 		$id = $this->request->route("id");
 		$url = $this->request->input("url");
 		$parser = new Parser();
-		return response(200, $html);
+		$content = $parser->url($url)
+			->wrap("header", "class", "novel-header", 0)
+			->link("data-src")
+			->content("div", "class", "main-head")
+			->content("strong")
+			->get_content();
+
+		return response(200, $content);
 
 	}
 

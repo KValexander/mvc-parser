@@ -72,7 +72,11 @@ app.controllers.main = {
 	novel_page: function() {
 		if(!app.route.var.id) return app.route.not_found();
 		id = app.route.var.id;
-		console.log(id);
+		app.request.get(data => {
+			
+			console.log(data);
+
+		}, "/api/novel/"+id+"?url="+app.config.url+"novel/"+id);
 	},
 
 	// Get main page data
