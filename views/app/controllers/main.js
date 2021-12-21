@@ -70,12 +70,26 @@ app.controllers.main = {
 
 	// Novel page
 	novel_page: function() {
+		// Get id
 		if(!app.route.var.id) return app.route.not_found();
 		id = app.route.var.id;
+		
+		// Preloader
+		app.popup.preloader();
+
+		// Get request
 		app.request.get(data => {
-			
 			console.log(data);
 
+			app.template.get_template("novel/novel");
+			app.template.set_value({
+				"SRC": data.data[0],
+				"TITLE": data.data[1]
+			});
+			app.html.content.innerHTML = app.template.get_content();
+
+			// Hide preloader
+			app.popup.hide();
 		}, "/api/novel/"+id+"?url="+app.config.url+"novel/"+id);
 	},
 

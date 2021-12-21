@@ -43,6 +43,13 @@ div.wrap {
 	margin:  30px auto;
 }
 
+div.unit {
+	padding:  20px;
+	background-color:  white;
+	border-radius:  5px;
+	margin:  20px 0;
+}
+
 div.flex {
 	display: flex;
 	flex-wrap:  wrap;
@@ -146,3 +153,10 @@ main div.paginator div.active {
 	color:  white;
 }
 
+main div.novel div.novel-info {
+	display:  flex;
+}
+
+main div.novel div.novel-info img {
+	margin-right:  30px;
+}

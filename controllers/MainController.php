@@ -39,11 +39,12 @@ class MainController extends Controller {
 			->wrap("header", "class", "novel-header", 0)
 			->link("data-src")
 			->content("div", "class", "main-head")
-			->content("strong")
+			->wrap("nav", "class", "content-nav", 0)
+			->content("p", "class", "latest text1row")
+			->link("href")
 			->get_content();
 
-		return response(200, $content);
-
+		return response(200, $content[0]);
 	}
 
 }
