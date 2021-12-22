@@ -71,8 +71,7 @@ class Parser {
 
 	// Get content
 	public function get_content() {
-		if($this->n === NULL) $content = $this->content;
-		else $content =  $this->content[$this->n];
+		$content = ($this->n === NULL) ? $this->content : $this->content[$this->n];
 		$this->content = array();
 
 		return $content;
