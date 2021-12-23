@@ -44,7 +44,16 @@ class MainController extends Controller {
 			->link("href")
 			->get_content();
 
-		return response(200, $content[0]);
+		$chapters = $parser->url("https://www.lightnovelspot.com/". $content[0][count($content[0]) - 1])
+			->wrap("ul", "class", "chapter-list")
+			->link("href")
+			->content("strong", "class", "chapter-title")
+			->get_content();
+
+		return response(200, [
+			"content" => $content[0],
+			"chapters" => $chapters[0]
+		]);
 	}
 
 }

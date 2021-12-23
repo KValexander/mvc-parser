@@ -5,6 +5,11 @@ app.controllers.main = {
 		app.route.search(url);
 	},
 
+	// Chapter redirect
+	chapter_redirect: function(url) {
+		console.log(url);
+	},
+
 	// Main page
 	main_page: function() {
 		// Preloader
@@ -81,11 +86,22 @@ app.controllers.main = {
 		app.request.get(data => {
 			console.log(data);
 
+			// Content
+			content = data.data.content;
+
+			// Chapters
+			chapters = app.controllers.main.chapters_processing(data.data.chapters);
+
+			// Template
 			app.template.get_template("novel/novel");
 			app.template.set_value({
-				"SRC": data.data[0],
-				"TITLE": data.data[1]
+				"URL": app.config.url,
+				"SRC": content[0],
+				"TITLE": content[1],
+				"CHAPTERS": chapters
 			});
+
+			// Out template
 			app.html.content.innerHTML = app.template.get_content();
 
 			// Hide preloader
@@ -140,9 +156,20 @@ app.controllers.main = {
 			app.template.set_value({
 				"PAGE": i,
 				"N": i,
-			});
-			app.template.get_content();
+			}); app.template.get_content();
 		}
 		return app.template.get_content();
+	},
+
+	// Chapters processing
+	chapters_processing: function(chapters) {
+		app.template.get_template("novel/chapter", chapters.length);
+		chapters.forEach((chapter, i) => {
+			app.template.set_value({
+				"SRC": chapter[0],
+				"N": i,
+				"TITLE": chapter[1]
+			}); app.template.get_content();
+		}); return app.template.get_content();
 	},
 }
