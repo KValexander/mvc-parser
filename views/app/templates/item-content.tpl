@@ -1,5 +1,5 @@
 <div class="novel-item">
-	<a onclick='app.controllers.main.redirect("{URL}")'>
+	<a onclick='app.route.search("{URL}")'>
 		<div class="cover">
 			<img src="{SRC}" alt="">
 		</div>

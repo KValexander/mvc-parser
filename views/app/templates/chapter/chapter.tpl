@@ -1,5 +1,5 @@
 <div class="flex">
-	<h1 class="head"><a onclick='app.controllers.main.redirect("{URL}")'>{TITLE}</a></h1>
+	<h1 class="head"><a onclick='app.route.search("{URL}")'>{TITLE}</a></h1>
 	<p>Content from the <b>{SRC}</b></p>
 </div>
 

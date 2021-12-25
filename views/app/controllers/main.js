@@ -1,14 +1,5 @@
 // Main controller
 app.controllers.main = {
-	// Parser redirect
-	redirect: function(url) {
-		app.route.search(url);
-	},
-
-	// Chapter redirect
-	chapter_redirect: function(url) {
-		console.log(url);
-	},
 
 	// Main page
 	main_page: function() {
@@ -107,6 +98,11 @@ app.controllers.main = {
 			// Hide preloader
 			app.popup.hide();
 		}, "/api/novel/"+id+"?url="+app.config.url+"novel/"+id);
+	},
+
+	// Chapter page
+	chapter_page: function() {
+		console.log(app.route.var.id, app.route.var.chapter);
 	},
 
 	// Get main page data

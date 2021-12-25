@@ -1,3 +1,3 @@
 <div class="chapter">
-	<a onclick="app.controllers.main.chapter_redirect('{SRC}')">{N} {TITLE}</a>
+	<a onclick="app.route.search('{SRC}')">{N} {TITLE}</a>
 </div>
