@@ -56,6 +56,23 @@ class MainController extends Controller {
 		]);
 	}
 
+	// Chapter page
+	public function chapter_page() {
+		$id = $this->request->route("id");
+		$url = $this->request->input("url");
+		$parser = new Parser();
+		$info = $parser->url($url)
+			->wrap("section", "class", "page-in content-wrap", 0)
+			->content("div", "class", "titles")
+			->get_content();
+		$content = $parser->content("p")->get_content();
+
+		return response(200, [
+			"info" => $info,
+			"content" => $content
+		]);
+	}
+
 }
 
 ?>

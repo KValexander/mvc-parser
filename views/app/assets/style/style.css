@@ -174,3 +174,10 @@ main div.novel div.novel-chapters div.chapter:nth-child(4n), main div.novel div.
 main div.novel div.novel-chapters div.chapter:hover {
 	background-color:  #eee;
 }
+
+main div.chapter div.chapter-content p{
+	margin:  10px 0;
+	font-size:  14pt;
+	line-height:  30px;
+}
+

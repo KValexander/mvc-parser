@@ -75,7 +75,6 @@ app.controllers.main = {
 
 		// Get request
 		app.request.get(data => {
-			console.log(data);
 
 			// Content
 			content = data.data.content;
@@ -102,7 +101,36 @@ app.controllers.main = {
 
 	// Chapter page
 	chapter_page: function() {
-		console.log(app.route.var.id, app.route.var.chapter);
+		// Get id and chapter
+		if(!app.route.var.id || !app.route.var.chapter) return app.route.not_found();
+		id = app.route.var.id;
+		chapter = app.route.var.chapter;
+
+		// Preloader
+		app.popup.preloader();
+
+		// Get request
+		app.request.get(data => {
+			// Content
+			info = data.data.info[0];
+			content = app.controllers.main.chapter_processing(data.data.content);
+
+			// Get template
+			app.template.get_template("chapter/chapter");
+			app.template.set_value({
+				"URL": "novel/"+id,
+				"TITLE": info[0],
+				"SRC": app.config.url,
+				"CHAPTER-TITLE": info[2],
+				"CHAPTER-CONTENT": content
+			});
+
+			// Out template
+			app.html.content.innerHTML = app.template.get_content();
+
+			// Hide preloader
+			app.popup.hide();
+		}, "/api/novel/"+id+"/"+chapter+"?url="+app.config.url+"novel/"+id+"/"+chapter);
 	},
 
 	// Get main page data
@@ -168,4 +196,17 @@ app.controllers.main = {
 			}); app.template.get_content();
 		}); return app.template.get_content();
 	},
+
+	// Chapter processing
+	chapter_processing: function(content) {
+		let array = content;
+		if (typeof array === "object") {
+			array = [];
+			for (key in content)
+				array.push(content[key])
+		}
+		let result = "";
+		array.forEach(p => result += `<p>${p}</p>`);
+		return result;
+	}
 }
